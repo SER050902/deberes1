@@ -2,16 +2,16 @@ import csv
 
 def menu():
     while True:
-        print('\n1 TOTAL INFRACCIONS PENALS: ')
-        print('2 Mitjana de coacions total: ')
-        print('3 Promedio de : ')
-        print('4 : ')
-        print('5 : ')
-        print('6 :')
-        print('7 :')
+        print('\n1 TOTAL INFRACCIONS PENALS ')
+        print('2 Mitjana de coacions total ')
+        print('3 Lesiones se han cometido entre años incluidos ')
+        print('4 El año con mas delitos')
+        print('5 Orderna de forma mayor a menor de tortura e integridad moral en 3 años')
+        print('6 El año con los datos iguales de igual delitos')
+        print('7 Total faltas')
         print('0 Salir')
         opcion = -1
-        while opcion not in [1, 2, 3, 4, 5, 6, 7, 0]:
+        while opcion not in [1, 2, 3, 4, 5, 6, 7, 8, 0]:
             opcion = int(input('Opción: '))
         if opcion == 1:
             Anys()
@@ -24,9 +24,9 @@ def menu():
         elif opcion == 5:
             mayor_menor()
         elif opcion == 6:
-            datos()
-        elif opcion == 7:
             igual_delictes()
+        elif opcion == 7:
+            total_faltas()
         else:
             break
 
@@ -35,7 +35,7 @@ def Anys():
     with open('violencia genere.csv') as f:
         reader = csv.reader(f,delimiter=',')
         line_count = 0
-        sum = 0
+        total = 0
         num_nil = 0
         for line in reader:
             if line_count == 0:
@@ -43,9 +43,9 @@ def Anys():
                 continue
             if line_count == 1:
                 num_nil += 1
-                sum += int(line[1])
+                total += int(line[1])
                 print(num_nil,line[1])
-    print('\nTotal:',sum)
+    print('\nTotal:',total)
 
 
 
@@ -143,28 +143,20 @@ def igual_delictes():
     print('Años de igual de total infracciones penales y delictos: ',igual)
 
 
-
-
-def datos():
+def total_faltas():
     with open('violencia genere.csv') as f:
-        reader = csv.reader(f,delimiter=',')
-        num_linea = 0
-        for line in reader:
-            num_linea += 1
-            print(str(num_linea),line)
-
-def prueba():
-    with open('violencia genere.csv') as f:
-        reader = csv.reader(f,delimiter=',')
+        reader = csv.reader(f, delimiter=',')
         line_count = 0
+        calcular_valor = []
         for line in reader:
-            if line_count == 0:
+            if line_count ==0:
                 line_count += 1
                 continue
-            if line[1]:
-                toso = int(line[1])
-                print(toso)
+            if line_count == 1:
+                total_falta = int(line[16])
+                if total_falta == 0:
+                    calcular_valor.append(int(line[0]))
 
-
+    print('Años de que no tienes valores: ',calcular_valor)
 
 menu()
