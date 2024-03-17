@@ -1,0 +1,17 @@
+def delictes():
+    with open('violencia genere.csv') as f:
+        reader = csv.reader(f, delimiter=',')
+        line_count = 0
+        max_delictes = 0
+        for line in reader:
+            if line_count == 0:
+                line_count += 1
+                continue
+            if line[2]:
+                print(str(line_count),line[0],line[2])
+                total_delictes = int(line[2])
+                if total_delictes > max_delictes:
+                    max_delictes = total_delictes
+                    max_year = line[0]
+            line_count += 1
+        print("L'any amb més delictes (TOTAL DELICTES):", max_year)
