@@ -26,7 +26,7 @@ def menu():
         elif opcion == 6:
             datos()
         elif opcion == 7:
-            prueba()
+            igual_delictes()
         else:
             break
 
@@ -124,6 +124,24 @@ def mayor_menor():
     datos_moral.sort(reverse=True)
 
     print('\t\nLesiones entre', ano_inicio, 'y', ano_final, ':', str(calcular), ', Lesiones de mayor a menor:', datos_moral)
+
+def igual_delictes():
+    with open('violencia genere.csv') as f:
+        reader = csv.reader(f, delimiter=',')
+        line_count = 0
+        igual = []
+        for line in reader:
+            if line_count ==0:
+                line_count += 1
+                continue
+            if line_count == 1:
+                total_penals = int(line[1])
+                total_delictes = int(line[2])
+                if total_penals == total_delictes:
+                    igual.append(int(line[0]))
+
+    print('Años de igual de total infracciones penales y delictos: ',igual)
+
 
 
 
