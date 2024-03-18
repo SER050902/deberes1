@@ -1,0 +1,52 @@
+def menu():
+    while True:
+        print('\n1 TOTAL INFRACCIONS PENALS ')
+        print('2 Mitjana de coacions total ')
+        print('3 Lesiones se han cometido entre años incluidos ')
+        print('4 El año con mas delitos')
+        print('5 Orderna de forma mayor a menor de tortura e integridad moral en 3 años')
+        print('6 El año con los datos iguales de igual delitos')
+        print('7 Total faltas')
+        print('0 Salir')
+        opcion = -1
+        while opcion not in [1, 2, 3, 4, 5, 6, 7, 8, 0]:
+            opcion = int(input('Opción: '))
+        if opcion == 1:
+            Anys()
+        elif opcion == 2:
+            coaccions()
+        elif opcion == 3:
+            lesions()
+        elif opcion == 4:
+            delictes()
+        elif opcion == 5:
+            mayor_menor()
+        elif opcion == 6:
+            igual_delictes()
+        elif opcion == 7:
+            total_faltas()
+        else:
+            break
+
+
+def mayor_menor():
+    with open('violencia genere.csv') as f:
+        reader = csv.reader(f, delimiter=',')
+        line_count = 0
+        datos_moral = []
+        calcular = 0
+        ano_inicio = int(input('Introduce el año inicio: '))
+        ano_final = int(input('Introduce el año final del rango: '))
+        for line in reader:
+            if line_count == 0:
+                line_count += 1
+                continue
+            ano = int(line[0])
+            if ano_inicio <= ano <= ano_final:
+                calcular += 1
+                datos_moral.append(int(line[8]))
+            line_count += 1
+
+    datos_moral.sort(reverse=True)
+
+    print('\t\nLesiones entre', ano_inicio, 'y', ano_final, ':', str(calcular), ', Lesiones de mayor a menor:', datos_moral)
