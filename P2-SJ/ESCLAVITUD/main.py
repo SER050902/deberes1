@@ -16,9 +16,9 @@ def menu():
         if opcion == 1:
             max_exclavo()
         elif opcion == 2:
-            prueba()
-        elif opcion == 3:
             max_vendas()
+        elif opcion == 3:
+            año_promedio()
         elif opcion == 4:
             pass
         elif opcion == 5:
@@ -67,6 +67,24 @@ def max_vendas():
 
     print('\nEl estado del origen ',estado_origen,'con mas de vendas es', str(max_exclavo))
 
+def año_promedio():
+    with open('slavery.csv') as f:
+        reader = csv.reader(f, delimiter=',')
+        line_count = 0
+        num_esclavo = 0
+        total_esclavo = 0
+
+        for line in reader:
+            if line_count == 0:
+                line_count += 1
+                continue
+            if line_count == 1:
+                num_esclavo += 1
+                total_esclavo += float(line[8])
+
+        promedio = total_esclavo / num_esclavo
+        print('El promedieo',promedio)
+
 def prueba():
     with open('slavery.csv') as f:
         reader = csv.reader(f, delimiter=',')
@@ -79,4 +97,5 @@ def prueba():
             if line_count == 1:
                 datos_compra = line[2]
                 print(datos_compra)
+
 menu()
