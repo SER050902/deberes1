@@ -2,7 +2,7 @@ import csv
 
 def menu():
     while True:
-        print('\nCuál fue el comprador que más esclavos compró ')
+        print('\n1 Cuál fue el comprador que más esclavos compró ')
         print('2 Mitjana de coacions total ')
         print('3 Lesiones se han cometido entre años incluidos ')
         print('4 El año con mas delitos')
@@ -26,9 +26,9 @@ def menu():
         elif opcion == 6:
             encontrar_comprador()
         elif opcion == 7:
-            pass
+            media_genero()
         elif opcion == 8:
-            encontrar_comprador2()
+            dos_ano_venta()
         else:
             break
 
@@ -79,8 +79,12 @@ def ano_promedio():
                 line_count += 1
                 continue
             if line_count == 1:
-                num_esclavo += 1
-                total_esclavo += float(line[8])
+                sexo = line[9]
+                ano = float(line[8])
+                if sexo == 'F':
+                    if ano < 18 and ano > 1:
+                        num_esclavo += 1
+                        total_esclavo += float(line[8])
 
         promedio = total_esclavo / num_esclavo
         print('El promedieo',promedio)
@@ -151,6 +155,55 @@ def encontrar_comprador2():
             if line_count == 1:
                 nom_comprador = line[1]
                 print(nom_comprador)
+
+
+def media_genero():
+    with open('slavery.csv') as f:
+        reader = csv.reader(f, delimiter=',')
+        line_count = 0
+        cantidad_hombre = 0
+        cantidad_mujer = 0
+        hombre = 0
+        mujer = 0
+        for line in reader:
+            if line_count == 0:
+                line_count += 1
+                continue
+
+            sexo = line[9]
+            cantidad = float(line[8])
+
+            if sexo == 'M':
+                hombre += 1
+                cantidad_hombre += cantidad
+            elif sexo == 'F':
+                mujer += 1
+                cantidad_mujer += cantidad
+
+        medias_hombres = cantidad_hombre/hombre
+        medias_mujer = cantidad_mujer/mujer
+        print('Media de hombres:',medias_hombres,'media de mujeres:',medias_mujer)
+
+
+def dos_ano_venta():
+    with open('slavery.csv') as f:
+        reader = csv.reader(f, delimiter=',')
+        line_count = 0
+        ano_primero = int(input('Introduce primer año:'))
+        ano_final = int(input('Introduce final año:'))
+        calcular = 0
+        for line in reader:
+            if line_count == 0:
+                line_count += 1
+                continue
+            if line_count ==1:
+                cojer_ano = line[12].split('/')[2]
+                if ano_primero <= cojer_ano <= ano_final:
+                    calcular += 1
+
+        print(calcular)
+
+
 
 
 def prueba():

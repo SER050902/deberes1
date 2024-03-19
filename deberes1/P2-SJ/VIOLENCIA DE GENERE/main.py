@@ -133,7 +133,6 @@ def mayor_menor():
             if ano_3 == ano:
                 ano_del_3 = datos_Tortura_moral
                 datos_moral.append(datos_Tortura_moral)
-            line_count += 1
     datos_moral.sort(reverse=True)
 
     print('\t\nTortura e integridad moral 3 años: ',ano_1,'=',ano_del_1,',',ano_2,'=',ano_del_2,',',ano_3,'=',ano_del_3)
@@ -147,6 +146,7 @@ def igual_delictes():
             if line_count ==0:
                 line_count += 1
                 continue
+            print(line[0],line[1], line[2])
             if line_count == 1:
                 total_penals = int(line[1])
                 total_delictes = int(line[2])
@@ -170,6 +170,6 @@ def total_faltas():
                 if total_falta == 0:
                     calcular_valor.append(int(line[0]))
 
-    print('Años de que no tienes valores: ',calcular_valor)
+    print('Los Años que no tienes valores: ',calcular_valor)
 
 menu()

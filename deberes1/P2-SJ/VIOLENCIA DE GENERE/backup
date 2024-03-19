@@ -50,3 +50,43 @@ def mayor_menor():
     datos_moral.sort(reverse=True)
 
     print('\t\nLesiones entre', ano_inicio, 'y', ano_final, ':', str(calcular), ', Lesiones de mayor a menor:', datos_moral)
+
+
+
+def calcular_por_genero():
+    with open('slavery.csv') as f:
+        reader = csv.reader(f, delimiter=',')
+        line_count = 0
+        hombre = 0
+        mujer = 0
+        for line in reader:
+            if line_count == 0:
+                line_count += 1
+                continue
+            if line_count == 1:
+                sexo = line[9]
+                if sexo == 'M':
+                    hombre += 1
+                if sexo == 'F':
+                    mujer += 1
+
+        print('Hay',str(hombre),'hombres y',mujer,'mujeres')
+
+def ano_promedio():
+    with open('slavery.csv') as f:
+        reader = csv.reader(f, delimiter=',')
+        line_count = 0
+        num_esclavo = 0
+        total_esclavo = 0
+
+        for line in reader:
+            if line_count == 0:
+                line_count += 1
+                continue
+            if line_count == 1:
+                sexo = line[9]
+                ano = float(line[8])
+                if sexo == 'F':
+                    if ano < 18 and ano > 1:
+                        num_esclavo += 1
+                        total_esclavo += float(line[8])
